@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style type="text/css">
+    html, body {
+        padding: 0;
+        margin: 1rem;
+        overflow: hidden;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+    }
+
+    body {
+        background-color: #333333;
+    }
+
+    button {
+        display: inline-block;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        background-color: rgba(200, 200, 200, 0.2);
+        border-color: rgba(200, 200, 200, 0.2);
+        color: white;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    table {
+        background-color: floralwhite;
+    }
+
+    /* Special styling for WebKit/Blink */
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid #000000;
+        height: 16px;
+        width: 16px;
+        border-radius: 15px;
+        background: #ffffff;
+        cursor: pointer;
+        margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+    }
+
+    /* All the same stuff for Firefox */
+    input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 16px;
+        width: 16px;
+        border-radius: 15px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    /* All the same stuff for IE */
+    input[type=range]::-ms-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 16px;
+        width: 16px;
+        border-radius: 15px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    .myInput {
+        border: 1px solid #ccc !important;
+        border-radius: 4px;
+        padding: 0.2rem;
+        background-color: transparent;
+        color: white;
+        text-align: center;
+        width: 8rem;
+    }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+    input[type='radio'] {
+
+    }
+    input[type='radio']:checked {
+
+    }
+
+</style>
+<body>
+
+<canvas id="canvas" height="300px" style="border:1px solid #000000;"></canvas>
+
+<h2>
+    <label>Circle</label>
+    <input class="" type="radio" id="selectCircle" name="circle" value="circle" checked onclick="selectCircle()">
+
+    <input class="" type="radio" id="selectRectangle" name="rectangle" value="rectangle" onclick="selectRect()">
+    <label>Rectangle</label>
+
+    <br>
+    <br>
+
+    <table class="w3-table w3-border" style="width:100%; color: white;">
+        <tr>
+            <th style="background-color:red; width: 4rem;">Red:</th>
+            <td id="valRed" style="background-color:red; width: 3rem;">0</td>
+            <td id="red" style="background-color:red">
+                <input oninput="changeRed(this.value)" onchange="changeRed(this.value)" type="range" id="slideRed"
+                       name="slideRed" value="0" min="0" max="255" style="width: 100%">
+            </td>
+
+            <th style="background-color:green; width: 4rem;">Green:</th>
+            <td id="valGreen" style="background-color:green; width: 3rem;">0</td>
+            <td id="green" style="background-color:green">
+                <input oninput="changeGreen(this.value)" onchange="changeGreen(this.value)" type="range" id="slideGreen"
+                       name="slideGreen" value="0" min="0" max="255" style="width: 100%">
+            </td>
+
+            <th style="background-color:blue; width: 4rem;">Blue:</th>
+            <td id="valBlue" style="background-color:blue; width: 3rem;">0</td>
+            <td id="blue" style="background-color:blue">
+                <input oninput="changeBlue(this.value)" onchange="changeBlue(this.value)" type="range" id="slideBlue"
+                       name="slideBlue" value="0" min="0" max="255" style="width: 100%">
+            </td>
+        </tr>
+    </table>
+
+    <div id="change" style="height: 50px; background-color: rgb(0, 0, 0);"></div>
+
+    <br>
+
+    <div style="display: block">
+        <div style="display: inline-block">
+            <form>
+                <div id="myXpos" style="display: inline-block">
+                    X-Position: &nbsp;
+                    <input title="Xpos" class="myInput" type="number" id="shapeX">
+                    &nbsp;
+                    &nbsp;
+                </div>
+                <div id="myYpos" style="display: inline-block">
+                    Y-Position: &nbsp;
+                    <input title="Ypos" class="myInput" type="number" id="shapeY">
+                    &nbsp;
+                    &nbsp;
+                </div>
+                <div id="myWidth" style="display: none">
+                    Width: &nbsp;
+                    <input title="Width" class="myInput" type="number" id="shapeWidth">
+                    &nbsp;
+                    &nbsp;
+                </div>
+                <div id="myHeight" style="display: none">
+                    Height: &nbsp;
+                    <input title="Height" class="myInput" type="number" id="shapeHeight">
+                    &nbsp;
+                    &nbsp;
+                </div>
+                <div id="myRadius" style="display: inline-block">
+                    Radius: &nbsp;
+                    <input title="Radius" class="myInput" type="number" id="shapeRadius">
+                    &nbsp;
+                    &nbsp;
+                </div>
+            </form>
+        </div>
+        <div style="display: inline-block">
+            &nbsp;<button onclick="drawShape()">Draw shape</button>
+        </div>
+
+        <div>
+            <button onclick="save()">Save</button>
+        </div>
+        <div>
+            <button onclick="restore()">Restore</button>
+        </div>
+    </div>
+</h2>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.width = document.body.clientWidth;
+
+    ctx.fillStyle = "white";
+    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.fill();
+
+    var r = 0;
+    var g = 0;
+    var b = 0;
+
+    function changeRed(value) {
+        document.getElementById('valRed').innerHTML = value;
+        changeAll();
+    }
+    function changeGreen(value) {
+        document.getElementById('valGreen').innerHTML = value;
+        changeAll();
+    }
+    function changeBlue(value) {
+        document.getElementById('valBlue').innerHTML = value;
+        changeAll();
+    }
+    function changeAll() {
+        r = document.getElementById('valRed').innerHTML;
+        g = document.getElementById('valGreen').innerHTML;
+        b = document.getElementById('valBlue').innerHTML;
+        document.getElementById('change').style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+    function drawShape() {
+        if (document.getElementById("selectCircle").checked === true){
+            ctx.strokeStyle = document.getElementById('change').style.backgroundColor;
+            ctx.lineWidth = 10;
+            ctx.beginPath();
+            console.log(document.getElementById('change').style.backgroundColor);
+            ctx.arc(
+                document.getElementById("shapeX").value,
+                document.getElementById("shapeY").value,
+                document.getElementById("shapeRadius").value, 0, 2 * Math.PI);
+            ctx.stroke();
+
+        }
+        else if (document.getElementById("selectRectangle").checked === true) {
+            ctx.fillStyle = document.getElementById('change').style.backgroundColor;
+            ctx.fillRect(
+                document.getElementById("shapeX").value,
+                document.getElementById("shapeY").value,
+                document.getElementById("shapeWidth").value,
+                document.getElementById("shapeHeight").value);
+        }
+
+    }
+
+    function selectCircle() {
+        document.getElementById("selectRectangle").checked = false;
+        document.getElementById("selectCircle").checked = true;
+        document.getElementById("myWidth").style.display = "none";
+        document.getElementById("myHeight").style.display = "none";
+        document.getElementById("myRadius").style.display = "inline-block";
+
+    }
+    function selectRect() {
+        document.getElementById("selectCircle").checked = false;
+        document.getElementById("selectRectangle").checked = true;
+        document.getElementById("myWidth").style.display = "inline-block";
+        document.getElementById("myHeight").style.display = "inline-block";
+        document.getElementById("myRadius").style.display = "none";
+    }
+
+
+    function save() {
+        ctx.save();
+    }
+    function restore() {
+        ctx.restore();
+    }
+</script>
+
+</body>
+</html>
