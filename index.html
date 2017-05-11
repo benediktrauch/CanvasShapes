@@ -14,7 +14,7 @@
     }
 
     body {
-        background-color: #333333;
+        background-color: #929292;
     }
 
     button {
@@ -30,6 +30,12 @@
         color: white;
         text-align: center;
         font-size: 1.2rem;
+    }
+
+    h3 {
+        color: lightgray;
+        text-align: center;
+        font-size: 1rem;
     }
 
     table {
@@ -84,18 +90,42 @@
     input[type='number'] {
         -moz-appearance: textfield;
     }
+
     input[type='radio'] {
 
     }
+
     input[type='radio']:checked {
 
     }
 
 </style>
 <body>
+<h3>
+    <div style="display: block">
+        <div style="display: inline-block; float: left;">
+            X/Y = 0
+        </div>
+        <div id="myMiddleXpos" style="display: inline-block; text-align: center;">
 
+        </div>
+        <div  style="display: inline-block; float: right">
+            X =
+            <div id="myAbsoluteXpos" style="display: inline-block; float: right"></div>
+        </div>
+    </div>
+</h3>
 <canvas id="canvas" height="300px" style="border:1px solid #000000;"></canvas>
+<div style="display: block">
+    <div style="display: inline-block; float: left;">
+        <h3>
+            Y =&nbsp;
+            <div id="myAbsoluteYpos" style="display: inline-block; float: right">
 
+            </div>
+        </h3>
+    </div>
+</div>
 <h2>
     <label>Circle</label>
     <input class="" type="radio" id="selectCircle" name="circle" value="circle" checked onclick="selectCircle()">
@@ -188,6 +218,40 @@
     var ctx = canvas.getContext("2d");
 
     canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight - 200;
+    var halfWidth = canvas.width.valueOf() / 2;
+
+    window.onload = function () {
+        document.getElementById("myAbsoluteXpos").innerHTML = canvas.width;
+        document.getElementById("myAbsoluteYpos").innerHTML = canvas.height;
+        document.getElementById("myMiddleXpos").innerHTML = halfWidth.toString();
+        for (var i = 0; i < canvas.width; i += 50) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i, 5);
+            ctx.stroke();
+            if (i % 150 === 0) {
+                var xStep = i.toString();
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.font = "10px Arial";
+                ctx.fillText(xStep, i, 15);
+            }
+        }
+        for (var i = 0; i < canvas.height; i += 50) {
+            ctx.beginPath();
+            ctx.moveTo(0, i);
+            ctx.lineTo(5, i);
+            ctx.stroke();
+            if (i % 100 === 0) {
+                var xStep = i.toString();
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.font = "10px Arial";
+                ctx.fillText(xStep, 15, i + 2.5);
+            }
+        }
+    };
 
     ctx.fillStyle = "white";
     ctx.rect(0, 0, canvas.width, canvas.height);
@@ -217,7 +281,7 @@
     }
 
     function drawShape() {
-        if (document.getElementById("selectCircle").checked === true){
+        if (document.getElementById("selectCircle").checked === true) {
             ctx.strokeStyle = document.getElementById('change').style.backgroundColor;
             ctx.lineWidth = 10;
             ctx.beginPath();
