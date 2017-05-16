@@ -11,6 +11,7 @@
         overflow: hidden;
         font-family: 'Roboto', sans-serif;
         font-weight: 300;
+        height: 100%;
     }
 
     body {
@@ -84,7 +85,7 @@
         background-color: transparent;
         color: white;
         text-align: center;
-        width: 3    rem;
+        width: 3rem;
     }
 
     input[type='number'] {
@@ -132,49 +133,55 @@
 
     <input class="" type="radio" id="selectRectangle" name="rectangle" value="rectangle" onclick="selectRect()">
     <label onclick="selectRect()">Rectangle</label>
-
     <br>
     <br>
+    <div style="display: flex;">
+        <div style="display: inline-block; margin-right: 1rem; ">
+            <table class="w3-table w3-border" style="width:100%; color: white;">
+                <tr>
+                    <th style="background-color:red; width: 4rem;">Red:</th>
+                    <td id="valRed" style="background-color:red; width: 3rem;">0</td>
+                    <td id="red" style="background-color:red">
+                        <input oninput="changeRed(this.value)" onchange="changeRed(this.value)" type="range"
+                               id="slideRed"
+                               name="slideRed" value="0" min="0" max="255" style="width: 90%">
+                    </td>
+                    <td class="change" style="background-color: black; width: 3rem;"></td>
+                </tr>
 
-    <table class="w3-table w3-border" style="width:100%; color: white;">
-        <tr>
-            <th style="background-color:red; width: 4rem;">Red:</th>
-            <td id="valRed" style="background-color:red; width: 3rem;">0</td>
-            <td id="red" style="background-color:red">
-                <input oninput="changeRed(this.value)" onchange="changeRed(this.value)" type="range" id="slideRed"
-                       name="slideRed" value="0" min="0" max="255" style="width: 90%">
-            </td>
+                <tr>
+                    <th style="background-color:green; width: 4rem;">Green:</th>
+                    <td id="valGreen" style="background-color:green; width: 3rem;">0</td>
+                    <td id="green" style="background-color:green">
+                        <input oninput="changeGreen(this.value)" onchange="changeGreen(this.value)" type="range"
+                               id="slideGreen"
+                               name="slideGreen" value="0" min="0" max="255" style="width: 90%">
+                    </td>
+                    <td class="change" style="background-color: black; width: 3rem;"></td>
+                </tr>
 
-            <th style="background-color:green; width: 4rem;">Green:</th>
-            <td id="valGreen" style="background-color:green; width: 3rem;">0</td>
-            <td id="green" style="background-color:green">
-                <input oninput="changeGreen(this.value)" onchange="changeGreen(this.value)" type="range" id="slideGreen"
-                       name="slideGreen" value="0" min="0" max="255" style="width: 90%">
-            </td>
+                <tr>
+                    <th style="background-color:blue; width: 4rem;">Blue:</th>
+                    <td id="valBlue" style="background-color:blue; width: 3rem;">0</td>
+                    <td id="blue" style="background-color:blue">
+                        <input oninput="changeBlue(this.value)" onchange="changeBlue(this.value)" type="range"
+                               id="slideBlue"
+                               name="slideBlue" value="0" min="0" max="255" style="width: 90%">
+                    </td>
+                    <td class="change" style="background-color: black; width: 3rem;"></td>
+                </tr>
+            </table>
+        </div>
 
-            <th style="background-color:blue; width: 4rem;">Blue:</th>
-            <td id="valBlue" style="background-color:blue; width: 3rem;">0</td>
-            <td id="blue" style="background-color:blue">
-                <input oninput="changeBlue(this.value)" onchange="changeBlue(this.value)" type="range" id="slideBlue"
-                       name="slideBlue" value="0" min="0" max="255" style="width: 90%">
-            </td>
-        </tr>
-    </table>
-
-    <div id="change" style="height: 50px; background-color: rgb(0, 0, 0);"></div>
-
-    <br>
-
-    <div style="display: block">
-        <div style="display: inline-block">
+        <div style="display: inline-block; text-align: right; top: 0;">
             <form>
-                <div id="myXpos" style="display: inline-block">
+                <div id="myXpos" style="display: block">
                     X-Position: &nbsp;
                     <input title="Xpos" class="myInput" type="number" id="shapeX">
                     &nbsp;
                     &nbsp;
                 </div>
-                <div id="myYpos" style="display: inline-block">
+                <div id="myYpos" style="display: block">
                     Y-Position: &nbsp;
                     <input title="Ypos" class="myInput" type="number" id="shapeY">
                     &nbsp;
@@ -192,7 +199,7 @@
                     &nbsp;
                     &nbsp;
                 </div>
-                <div id="myRadius" style="display: inline-block">
+                <div id="myRadius" style="display: block">
                     Radius: &nbsp;
                     <input title="Radius" class="myInput" type="number" id="shapeRadius">
                     &nbsp;
@@ -218,7 +225,8 @@
     var ctx = canvas.getContext("2d");
 
     canvas.width = document.body.clientWidth;
-    canvas.height = document.body.clientHeight - 200;
+    canvas.height = document.body.clientHeight - 300;
+    console.log(canvas.height);
     var halfWidth = canvas.width.valueOf() / 2;
 
     window.onload = function () {
@@ -277,13 +285,15 @@
         r = document.getElementById('valRed').innerHTML;
         g = document.getElementById('valGreen').innerHTML;
         b = document.getElementById('valBlue').innerHTML;
-        document.getElementById('change').style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+        for (var i = 0; i < 3; i++) {
+            document.getElementsByClassName('change')[i].style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+        }
     }
 
     function drawShape() {
         if (document.getElementById("selectCircle").checked === true) {
-            ctx.strokeStyle = document.getElementById('change').style.backgroundColor;
-            ctx.fillStyle = document.getElementById('change').style.backgroundColor;
+            ctx.strokeStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
+            ctx.fillStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
             ctx.lineWidth = 10;
             ctx.beginPath();
             ctx.arc(
@@ -293,7 +303,7 @@
             ctx.fill();
         }
         else if (document.getElementById("selectRectangle").checked === true) {
-            ctx.fillStyle = document.getElementById('change').style.backgroundColor;
+            ctx.fillStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
             ctx.fillRect(
                 document.getElementById("shapeX").value,
                 document.getElementById("shapeY").value,
@@ -310,14 +320,14 @@
         document.getElementById("selectCircle").checked = true;
         document.getElementById("myWidth").style.display = "none";
         document.getElementById("myHeight").style.display = "none";
-        document.getElementById("myRadius").style.display = "inline-block";
+        document.getElementById("myRadius").style.display = "block";
 
     }
     function selectRect() {
         document.getElementById("selectCircle").checked = false;
         document.getElementById("selectRectangle").checked = true;
-        document.getElementById("myWidth").style.display = "inline-block";
-        document.getElementById("myHeight").style.display = "inline-block";
+        document.getElementById("myWidth").style.display = "block";
+        document.getElementById("myHeight").style.display = "block";
         document.getElementById("myRadius").style.display = "none";
     }
 
