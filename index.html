@@ -84,7 +84,7 @@
         background-color: transparent;
         color: white;
         text-align: center;
-        width: 8rem;
+        width: 3    rem;
     }
 
     input[type='number'] {
@@ -109,7 +109,7 @@
         <div id="myMiddleXpos" style="display: inline-block; text-align: center;">
 
         </div>
-        <div  style="display: inline-block; float: right">
+        <div style="display: inline-block; float: right">
             X =
             <div id="myAbsoluteXpos" style="display: inline-block; float: right"></div>
         </div>
@@ -127,11 +127,11 @@
     </div>
 </div>
 <h2>
-    <label>Circle</label>
+    <label onclick="selectCircle()">Circle</label>
     <input class="" type="radio" id="selectCircle" name="circle" value="circle" checked onclick="selectCircle()">
 
     <input class="" type="radio" id="selectRectangle" name="rectangle" value="rectangle" onclick="selectRect()">
-    <label>Rectangle</label>
+    <label onclick="selectRect()">Rectangle</label>
 
     <br>
     <br>
@@ -142,21 +142,21 @@
             <td id="valRed" style="background-color:red; width: 3rem;">0</td>
             <td id="red" style="background-color:red">
                 <input oninput="changeRed(this.value)" onchange="changeRed(this.value)" type="range" id="slideRed"
-                       name="slideRed" value="0" min="0" max="255" style="width: 100%">
+                       name="slideRed" value="0" min="0" max="255" style="width: 90%">
             </td>
 
             <th style="background-color:green; width: 4rem;">Green:</th>
             <td id="valGreen" style="background-color:green; width: 3rem;">0</td>
             <td id="green" style="background-color:green">
                 <input oninput="changeGreen(this.value)" onchange="changeGreen(this.value)" type="range" id="slideGreen"
-                       name="slideGreen" value="0" min="0" max="255" style="width: 100%">
+                       name="slideGreen" value="0" min="0" max="255" style="width: 90%">
             </td>
 
             <th style="background-color:blue; width: 4rem;">Blue:</th>
             <td id="valBlue" style="background-color:blue; width: 3rem;">0</td>
             <td id="blue" style="background-color:blue">
                 <input oninput="changeBlue(this.value)" onchange="changeBlue(this.value)" type="range" id="slideBlue"
-                       name="slideBlue" value="0" min="0" max="255" style="width: 100%">
+                       name="slideBlue" value="0" min="0" max="255" style="width: 90%">
             </td>
         </tr>
     </table>
@@ -285,7 +285,6 @@
             ctx.strokeStyle = document.getElementById('change').style.backgroundColor;
             ctx.lineWidth = 10;
             ctx.beginPath();
-            console.log(document.getElementById('change').style.backgroundColor);
             ctx.arc(
                 document.getElementById("shapeX").value,
                 document.getElementById("shapeY").value,
@@ -301,6 +300,8 @@
                 document.getElementById("shapeWidth").value,
                 document.getElementById("shapeHeight").value);
         }
+        click_count = 0;
+        ctx.save();
 
     }
 
@@ -320,6 +321,76 @@
         document.getElementById("myRadius").style.display = "none";
     }
 
+    if (canvas && canvas.getContext) {
+        canvas.addEventListener('mousemove',
+            onMouseMoveOnCanvas, false);
+        canvas.addEventListener('mousedown',
+            onMouseDownOnCanvas, false);
+        canvas.addEventListener('mouseup',
+            onMouseUpOnCanvas, false);
+        ctx = canvas.getContext('2d');
+    }
+
+    var mouse_down;
+    var click_count = 0;
+    var rect = canvas.getBoundingClientRect();
+
+    function onMouseDownOnCanvas(evt) {
+        mouse_down = true;
+        if (document.getElementById("selectCircle").checked === true) {
+            if (click_count <= 0) {
+                document.getElementById("shapeX").value = evt.clientX - rect.left;
+                document.getElementById("shapeY").value = evt.clientY - rect.top;
+            } else {
+                document.getElementById("shapeRadius").value = Math.sqrt(Math.pow(((evt.clientX - rect.left) - document.getElementById("shapeX").value), 2) + Math.pow(((evt.clientY - rect.top) - document.getElementById("shapeY").value), 2));
+                drawShape();
+                click_count = 0;
+            }
+        }
+        else if (document.getElementById("selectRectangle").checked === true) {
+            if (click_count <= 0) {
+                document.getElementById("shapeX").value = evt.clientX - rect.left;
+                document.getElementById("shapeY").value = evt.clientY - rect.top;
+            } else {
+                document.getElementById("shapeWidth").value = (evt.clientX - rect.left) - document.getElementById("shapeX").value;
+                document.getElementById("shapeHeight").value = (evt.clientY - rect.top) - document.getElementById("shapeY").value;
+                drawShape();
+                click_count = 0;
+            }
+        }
+
+    }
+
+    function onMouseUpOnCanvas(evt) {
+        mouse_down = false;
+        if (document.getElementById("selectCircle").checked === true) {
+            if (click_count <= 0) {
+                if ((evt.clientX - rect.left).toString() !== document.getElementById("shapeX").value.toString() && (evt.clientY - rect.top).toString() !== document.getElementById("shapeY").value.toString()) {
+                    document.getElementById("shapeRadius").value = Math.sqrt(Math.pow(((evt.clientX - rect.left) - document.getElementById("shapeX").value), 2) + Math.pow(((evt.clientY - rect.top) - document.getElementById("shapeY").value), 2));
+                    drawShape();
+                    click_count = 0;
+                } else {
+                    click_count++;
+                }
+            }
+        }
+        else if (document.getElementById("selectRectangle").checked === true) {
+            if (click_count <= 0) {
+                if ((evt.clientX - rect.left).toString() !== document.getElementById("shapeX").value.toString() && (evt.clientY - rect.top).toString() !== document.getElementById("shapeY").value.toString()) {
+                    document.getElementById("shapeWidth").value = (evt.clientX - rect.left) - document.getElementById("shapeX").value;
+                    document.getElementById("shapeHeight").value = (evt.clientY - rect.top) - document.getElementById("shapeY").value;
+                    drawShape();
+                    click_count = 0;
+                } else {
+                    click_count++;
+                }
+            }
+        }
+    }
+    function onMouseMoveOnCanvas(evt) {
+        if (mouse_down) {
+        }
+    }
 
     function save() {
         ctx.save();
@@ -327,6 +398,8 @@
     function restore() {
         ctx.restore();
     }
+
+
 </script>
 
 </body>

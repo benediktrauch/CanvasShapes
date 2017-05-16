@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style type="text/css">
+    html, body {
+        padding: 0;
+        margin: 1rem;
+        overflow: hidden;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+    }
+
+    body {
+        background-color: #929292;
+    }
+
+    button {
+        display: inline-block;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        background-color: rgba(200, 200, 200, 0.2);
+        border-color: rgba(200, 200, 200, 0.2);
+        color: white;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        color: lightgray;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    table {
+        background-color: floralwhite;
+    }
+
+    /* Special styling for WebKit/Blink */
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid #000000;
+        height: 16px;
+        width: 16px;
+        border-radius: 15px;
+        background: #ffffff;
+        cursor: pointer;
+        margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+    }
+
+    /* All the same stuff for Firefox */
+    input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 16px;
+        width: 16px;
+        border-radius: 15px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    /* All the same stuff for IE */
+    input[type=range]::-ms-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 16px;
+        width: 16px;
+        border-radius: 15px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    .myInput {
+        border: 1px solid #ccc !important;
+        border-radius: 4px;
+        padding: 0.2rem;
+        background-color: transparent;
+        color: white;
+        text-align: center;
+        width: 8rem;
+    }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    input[type='radio'] {
+
+    }
+
+    input[type='radio']:checked {
+
+    }
+
+</style>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <style>
+            circle {
+                background-color: black;
+            }
+
+        </style>
+<!--
+        <radialGradient>
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset="0.22" stop-color="#d1ecf7"/>
+            <stop offset="0.71" stop-color="#5dbbe5"/>
+            <stop offset="1" stop-color="#169dd9"/>
+        </radialGradient>
+-->
+    </defs>
+
+
+    <clipPath>
+        <path>
+            <g>
+                <text class="cls-3" transform="translate(122.84 476.06)">
+                    <tspan>M</tspan>
+                    <tspan>T</tspan>
+                    <tspan>I</tspan>
+                </text>
+                <circle class="" cx="100" cy="100" r="100"/>
+            </g>
+        </path>
+    </clipPath>
+</svg>
+
+<!--
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 776.88 776.88">
+    <defs>
+        <style>.cls-1 {
+            fill: none;
+        }
+
+        .cls-2 {
+            isolation: isolate;
+        }
+
+        .cls-3 {
+            font-size: 254px;
+            font-family: Normetica-B, Normetica B;
+        }
+
+        .cls-3, .cls-7 {
+            fill: #fff;
+        }
+
+        .cls-4 {
+            letter-spacing: -0.01em;
+        }
+
+        .cls-5 {
+            letter-spacing: -0.05em;
+        }
+
+        .cls-6 {
+            opacity: 0.6;
+            mix-blend-mode: multiply;
+        }
+
+        .cls-8 {
+            clip-path: url(#clip-path);
+        }
+
+        .cls-9 {
+            fill: url(#Unbenannter_Verlauf_3);
+        }
+        </style>
+        <clipPath id="clip-path" transform="translate(-124.37 -132.06)">
+            <path id="SVGID" class="cls-1"
+                  d="M499.64,197.72C328.34,199.41,190,338.82,190,510.47S328.08,821.31,499.15,823.28h7.31c171.07-2,309.13-141.28,309.13-312.81S677.27,199.41,506,197.72Z"/>
+        </clipPath>
+        <radialGradient id="Unbenannter_Verlauf_3" cx="-98.09" cy="921.21" r="1"
+                        gradientTransform="matrix(531.74, 0, 0, -537.33, 52340.76, 494884.79)"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset="0.22" stop-color="#d1ecf7"/>
+            <stop offset="0.71" stop-color="#5dbbe5"/>
+            <stop offset="1" stop-color="#169dd9"/>
+        </radialGradient>
+    </defs>
+    <title>HRWLogo</title>
+    <g class="cls-2">
+        <g id="Ebene_1" data-name="Ebene 1">
+            <text class="cls-3" transform="translate(122.84 476.06)">
+                <tspan class="cls-4">M</tspan>
+                <tspan x="201.67" y="0">T</tspan>
+                <tspan class="cls-5" x="327.91" y="0">I</tspan>
+            </text>
+            <circle class="cls-7" cx="378.43" cy="378.43" r="358.43"/>
+            <g class="cls-8">
+                <rect class="cls-9" x="65.66" y="65.65" width="625.56" height="625.56"/>
+            </g>
+            <path class="cls-7"
+                  d="M409.67,604.19a3.71,3.71,0,0,1-1.27,2.57,4,4,0,0,1-3,1.29H384.21a4.15,4.15,0,0,1-3.11-1.16,3.73,3.73,0,0,1-1.13-2.7V481.86l-25.45,67.08q-1.42,3.85-4,3.85H320.87q-3.11,0-4.24-3.85l-25.17-67.08V604.19a4.14,4.14,0,0,1-4.24,3.85H266a4.15,4.15,0,0,1-3.11-1.16,3.73,3.73,0,0,1-1.13-2.7V428.4a3.73,3.73,0,0,1,1.13-2.7,4.15,4.15,0,0,1,3.11-1.16h27.43a3.36,3.36,0,0,1,2.69,1.16,8.83,8.83,0,0,1,1.56,2.7l37.89,100.23L373.47,428.4a8.65,8.65,0,0,1,1.55-2.7,3.35,3.35,0,0,1,2.69-1.16h27.43q4.52,0,4.53,3.85Z"
+                  transform="translate(-124.37 -132.06)"/>
+            <path class="cls-7"
+                  d="M602,445.65a3.45,3.45,0,0,1-1.26,2.83,4.49,4.49,0,0,1-2.93,1H538.74V604.19a33,33,0,0,0-2.26,2.57,4,4,0,0,1-2.93,1.29h-21a4.2,4.2,0,0,1-2.93-1.16,3.56,3.56,0,0,1-1.26-2.7V449.5H448.34q-4.47,0-4.47-3.85V428.4a3.56,3.56,0,0,1,1.26-2.7,4.2,4.2,0,0,1,2.93-1.16H597.53q4.47,0,4.47,3.85Z"
+                  transform="translate(-124.37 -132.06)"/>
+            <path class="cls-7"
+                  d="M725,604.19a3.71,3.71,0,0,1-1.27,2.57,4,4,0,0,1-3,1.29H636.69a4.24,4.24,0,0,1-3-1.16,3.55,3.55,0,0,1-1.27-2.7V586.11a3.75,3.75,0,0,1,1.12-2.7,4.11,4.11,0,0,1,3.1-1.16h27.57v-132H640.91a4.54,4.54,0,0,1-3-1,3.44,3.44,0,0,1-1.27-2.83v-18a3.75,3.75,0,0,1,1.12-2.7,4.11,4.11,0,0,1,3.1-1.16h75.67a4.77,4.77,0,0,1,2.81,1,3.32,3.32,0,0,1,1.41,2.83v18a3.44,3.44,0,0,1-1.27,2.83,4.53,4.53,0,0,1-3,1H693.8v132h27a4.78,4.78,0,0,1,2.81,1,3.32,3.32,0,0,1,1.41,2.83Z"
+                  transform="translate(-124.37 -132.06)"/>
+            <path class="cls-7" d="M586.16,367.4" transform="translate(-124.37 -132.06)"/>
+        </g>
+    </g>
+</svg>
+-->
+</body>
+</html>
