@@ -283,14 +283,14 @@
     function drawShape() {
         if (document.getElementById("selectCircle").checked === true) {
             ctx.strokeStyle = document.getElementById('change').style.backgroundColor;
+            ctx.fillStyle = document.getElementById('change').style.backgroundColor;
             ctx.lineWidth = 10;
             ctx.beginPath();
             ctx.arc(
                 document.getElementById("shapeX").value,
                 document.getElementById("shapeY").value,
                 document.getElementById("shapeRadius").value, 0, 2 * Math.PI);
-            ctx.stroke();
-
+            ctx.fill();
         }
         else if (document.getElementById("selectRectangle").checked === true) {
             ctx.fillStyle = document.getElementById('change').style.backgroundColor;
