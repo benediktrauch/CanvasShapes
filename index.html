@@ -92,12 +92,8 @@
         -moz-appearance: textfield;
     }
 
-    input[type='radio'] {
-
-    }
-
-    input[type='radio']:checked {
-
+    button {
+        width: 10rem;
     }
 
 </style>
@@ -173,7 +169,7 @@
             </table>
         </div>
 
-        <div style="display: inline-block; text-align: right; top: 0;">
+        <div style="display: inline-block; text-align: right; top: 0; width: 20%;">
             <form>
                 <div id="myXpos" style="display: block">
                     X-Position: &nbsp;
@@ -207,21 +203,21 @@
                 </div>
             </form>
         </div>
-        <div style="display: inline-block; margin-right: 1rem; float: right;">
-            <div style="display:flex; margin-right: 1rem; ">
-                <div style="margin-right: 1rem; display: inline-block">
+        <div style="display: flex; text-align: right; margin-right: 1rem; float: right;  width: 24%;">
+            <div style="display:block; margin-right: 1rem;">
+                <div style="margin: 0.25rem; display: inline-block">
                     <button onclick="drawShape()">Draw shape</button>
                 </div>
 
-                <div style=" margin-right: 1rem; display: inline-block">
+                <div style="margin: 0.25rem; display: inline-block">
                     <button onclick="undo()">Undo</button>
                 </div>
 
-                <div style="margin-right: 1rem; display: inline-block">
+                <div style="margin: 0.25rem; display: inline-block">
                     <button onclick="save()">Save</button>
                 </div>
 
-                <div style="margin-right: 1rem; display: inline-block">
+                <div style="margin: 0.25rem; display: inline-block">
                     <button onclick="restore()">Restore</button>
                 </div>
 
@@ -305,7 +301,12 @@
     }
 
     function drawShape() {
-        tempStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        if (ctx.getImageData(0, 0, canvas.width, canvas.height) === tempStorage) {
+            console.log("not Saved");
+        } else {
+            tempStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            console.log("Saved");
+        }
         if (document.getElementById("selectCircle").checked === true) {
             ctx.strokeStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
             ctx.fillStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
@@ -417,6 +418,7 @@
         ctx.putImageData(saveStorage, 0, 0);
     }
     function undo() {
+        console.log("undo");
         ctx.putImageData(tempStorage, 0, 0);
     }
 
