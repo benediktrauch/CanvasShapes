@@ -345,8 +345,6 @@
     }
 
     if (canvas && canvas.getContext) {
-        canvas.addEventListener('mousemove',
-            onMouseMoveOnCanvas, false);
         canvas.addEventListener('mousedown',
             onMouseDownOnCanvas, false);
         canvas.addEventListener('mouseup',
@@ -410,10 +408,7 @@
             }
         }
     }
-    function onMouseMoveOnCanvas(evt) {
-        if (mouse_down) {
-        }
-    }
+
     function save() {
         saveStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
     }
