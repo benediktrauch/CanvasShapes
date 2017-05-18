@@ -410,7 +410,10 @@
             }
         }
     }
-
+    function onMouseMoveOnCanvas(evt) {
+        if (mouse_down) {
+        }
+    }
     function save() {
         saveStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
     }
