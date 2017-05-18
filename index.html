@@ -231,8 +231,9 @@
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
-    var tempStorage;
+    var tempStorage = [];
     var saveStorage;
+    var index = 0;
 
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientHeight - 300;
@@ -301,13 +302,11 @@
     }
 
     function drawShape() {
-        if (ctx.getImageData(0, 0, canvas.width, canvas.height) === tempStorage) {
-            console.log("not Saved");
-        } else {
-            tempStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            console.log("Saved");
-        }
+
         if (document.getElementById("selectCircle").checked === true) {
+            tempStorage[index] = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            index++;
+            console.log(index);
             ctx.strokeStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
             ctx.fillStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
             ctx.lineWidth = 10;
@@ -418,8 +417,9 @@
         ctx.putImageData(saveStorage, 0, 0);
     }
     function undo() {
-        console.log("undo");
-        ctx.putImageData(tempStorage, 0, 0);
+            ctx.putImageData(tempStorage[index-1], 0, 0);
+            index--;
+            console.log(index);
     }
 
 
