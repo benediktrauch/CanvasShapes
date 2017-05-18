@@ -135,8 +135,8 @@
     <label onclick="selectRect()">Rectangle</label>
     <br>
     <br>
-    <div style="display: flex;">
-        <div style="display: inline-block; margin-right: 1rem; ">
+    <div style="display: flex; width: 100%;">
+        <div style="display: inline-block; margin-right: 1rem; width: 50%;">
             <table class="w3-table w3-border" style="width:100%; color: white;">
                 <tr>
                     <th style="background-color:red; width: 4rem;">Red:</th>
@@ -207,15 +207,26 @@
                 </div>
             </form>
         </div>
-        <div style="display: inline-block">
-            &nbsp;<button onclick="drawShape()">Draw shape</button>
-        </div>
+        <div style="display: inline-block; margin-right: 1rem; float: right;">
+            <div style="display:flex; margin-right: 1rem; ">
+                <div style="margin-right: 1rem; display: inline-block">
+                    <button onclick="drawShape()">Draw shape</button>
+                </div>
 
-        <div>
-            <button onclick="save()">Save</button>
-        </div>
-        <div>
-            <button onclick="restore()">Restore</button>
+                <div style=" margin-right: 1rem; display: inline-block">
+                    <button onclick="undo()">Undo</button>
+                </div>
+
+                <div style="margin-right: 1rem; display: inline-block">
+                    <button onclick="save()">Save</button>
+                </div>
+
+                <div style="margin-right: 1rem; display: inline-block">
+                    <button onclick="restore()">Restore</button>
+                </div>
+
+
+            </div>
         </div>
     </div>
 </h2>
@@ -223,6 +234,9 @@
 <script>
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
+
+    var tempStorage;
+    var saveStorage;
 
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientHeight - 300;
@@ -291,6 +305,7 @@
     }
 
     function drawShape() {
+        tempStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
         if (document.getElementById("selectCircle").checked === true) {
             ctx.strokeStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
             ctx.fillStyle = document.getElementsByClassName('change')[0].style.backgroundColor;
@@ -311,8 +326,6 @@
                 document.getElementById("shapeHeight").value);
         }
         click_count = 0;
-        ctx.save();
-
     }
 
     function selectCircle() {
@@ -397,16 +410,16 @@
             }
         }
     }
-    function onMouseMoveOnCanvas(evt) {
-        if (mouse_down) {
-        }
-    }
 
     function save() {
-        ctx.save();
+        saveStorage = ctx.getImageData(0, 0, canvas.width, canvas.height);
     }
+
     function restore() {
-        ctx.restore();
+        ctx.putImageData(saveStorage, 0, 0);
+    }
+    function undo() {
+        ctx.putImageData(tempStorage, 0, 0);
     }
 
 
